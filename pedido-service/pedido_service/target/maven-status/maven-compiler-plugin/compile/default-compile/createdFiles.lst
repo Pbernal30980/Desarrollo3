@@ -1,0 +1,6 @@
+com\maven\pedido_service\ProductoDTO.class
+com\maven\pedido_service\ProductoClient.class
+com\maven\pedido_service\PedidoRequest.class
+com\maven\pedido_service\Pedido.class
+com\maven\pedido_service\PedidoController.class
+com\maven\pedido_service\PedidoServiceApplication.class
