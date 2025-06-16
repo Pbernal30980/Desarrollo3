@@ -4,7 +4,7 @@ metadata:
   name: auth-service
 spec:
   ports:
-    - port: 8080
+    - port: 80
   selector:
     app: auth-service
 ---
@@ -23,11 +23,11 @@ spec:
     spec:
       containers:
         - name: auth
-          image: alvarosalazar/pais-service:latest  # Nota: Podría ser un typo; asumimos que es correcto por ahora
+          image: nginx
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
-            - name: db2
+            - name: DB_URL
               value: jdbc:postgresql://db2:5432/curso_springboot
             - name: DB_USERNAME
               value: devdb
@@ -35,9 +35,10 @@ spec:
               value: a1b2c3d4
             - name: JPA_DDL
               value: create-drop
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
+          
+          # readinessProbe:
+          #   httpGet:
+          #     path /actuator/health
+          #     port: 80:80
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5

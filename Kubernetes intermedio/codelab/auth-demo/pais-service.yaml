@@ -4,7 +4,7 @@ metadata:
   name: pais-service
 spec:
   ports:
-    - port: 8080
+    - port: 80
   selector:
     app: pais-service
 ---
@@ -23,9 +23,9 @@ spec:
     spec:
       containers:
         - name: pais
-          image: alvarosalazar/pais-service:latest
+          image: nginx
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: DB_URL
               value: jdbc:postgresql://db1:5432/curso_springboot
@@ -35,9 +35,10 @@ spec:
               value: a1b2c3d4
             - name: JPA_DDL
               value: create-drop
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
+          
+          # readinessProbe:
+          #   httpGet:
+          #     path: /actuator/health
+          #     port: 8080
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
