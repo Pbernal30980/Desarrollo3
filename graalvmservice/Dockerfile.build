@@ -1,0 +1,17 @@
+FROM ubuntu:22.04
+
+ENV SDKMAN_DIR="/root/.sdkman"
+ENV JAVA_VERSION="23.0.2-graalce"
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y apt-utils curl unzip zip build-essential libstdc++6 wget git && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -s "https://get.sdkman.io" | bash
+RUN bash -c "source /root/.sdkman/bin/sdkman-init.sh && sdk install java ${JAVA_VERSION} && java -version"
+RUN echo "source /root/.sdkman/bin/sdkman-init.sh" >> /root/.bashrc
+
+WORKDIR /home/builder/project
+
+CMD [ "/bin/bash" ]
